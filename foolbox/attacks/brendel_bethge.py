@@ -533,8 +533,8 @@ class BrendelBethgeAttack(MinimizationAttack, ABC):
             # we aim to slight overshoot over the boundary to stay within the adversarial region
             corr_logits_diffs = np.where(
                 -logits_diffs < 0,
-                -self.overshoot * logits_diffs,
-                -(2 - self.overshoot) * logits_diffs,
+                -logits_diffs-((self.overshoot-1)*logits_diffs).clip(min=0.001),
+                -logits_diffs-((1-self.overshoot)*logits_diffs).clip(min=0.001),
             )
 
             # employ solver to find optimal step within trust region
