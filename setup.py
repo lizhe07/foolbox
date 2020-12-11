@@ -18,6 +18,7 @@ except IOError:
 
 install_requires = [
     "numpy",
+    "numba",
     "scipy",
     "setuptools",
     "eagerpy==0.29.0",
